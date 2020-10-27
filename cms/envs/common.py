@@ -208,7 +208,12 @@ FEATURES = {
 
     # Allow creating courses with non-ascii characters in the course id
     'ALLOW_UNICODE_COURSE_ID': False,
-
+    
+    #-------------------------------------------#
+    #S4V_ CUSTOMIZE CERTIFICATE ON DJANGO ADMIN
+    'CUSTOM_CERTIFICATE_TEMPLATES_ENABLED': True,
+    #-------------------------------------------#
+    
     # Prevent concurrent logins per user
     'PREVENT_CONCURRENT_LOGINS': False,
 
