@@ -95,7 +95,12 @@ FEATURES = {
     # in sync with the corresponding ones in cms/envs/common.py
     'ENABLE_DISCUSSION_SERVICE': True,
     'ENABLE_TEXTBOOK': True,
-
+    
+    #-------------------------------------------#
+    #S4V_ CUSTOMIZE CERTIFICATE ON DJANGO ADMIN
+    'CUSTOM_CERTIFICATE_TEMPLATES_ENABLED': True,
+    #-------------------------------------------#    
+    
     # discussion home panel, which includes a subscription on/off setting for discussion digest emails.
     # this should remain off in production until digest notifications are online.
     'ENABLE_DISCUSSION_HOME_PANEL': False,
