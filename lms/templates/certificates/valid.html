@@ -1,3 +1,162 @@
+<style>
+.container {
+  width: 70%;
+  height: auto;
+  margin: auto;
+  margin-top: 50px;
+}
+.certificate {
+  font-family: Quicksand,sans-serif;
+  position: relative;
+  background-image: url("./public/StarBackground.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 54.5vw;
+}
+
+.middle{
+  position: absolute;
+  margin:auto;
+}
+
+.logo {
+  width: 38%;
+  display: block;
+  margin: 21vw;
+  margin-top: 13%;
+}
+
+.cert-student-name {
+  width: 55%;
+  margin: 15vw;
+  margin-top: 25.5%;
+  border-bottom: 0.15vw solid #202e66;
+}
+
+.cert-student-name p {
+  font-weight: bold;
+  font-size: 1.4vw;;
+  text-align: center;
+  color: #202e66;
+  margin-block-end: 0.8vw;
+}
+
+.class-name {
+  width: 80%;
+  margin: 7vw;
+  margin-top: 32%;
+}
+
+.class-name p {
+  text-align: center;
+  color: #202e66;
+  margin-block-start: 1vw;
+  margin-block-end: 1vw;
+}
+
+#cert-status {
+  font-size: 1.15vw;
+}
+
+#cert-title {
+  font-size: 1.9vw;
+  font-weight: bold;
+  margin-block-end: 0.5vw;
+}
+
+#cert-program {
+  font-size: 1.4vw;
+  font-weight:lighter;
+  margin-block-start: 0.5vw;
+}
+
+#cert-org {
+  margin-block-start: 2vw;
+  font-size: 1.15vw;
+}
+
+.cert-date {
+  font-family: Quicksand,sans-serif;
+  width: 20%;
+  margin: 28vw;
+  margin-top: 47%;
+  border-bottom: 0.15vw solid #202e66;
+}
+
+.cert-date p {
+  font-size: 1.4vw;;
+  text-align: center;
+  color: #202e66;
+  margin-block-end: 0.8vw;
+}
+
+.cert-signature {
+  width: 80%;
+  margin: 9vw;
+  margin-top: 55%;
+} 
+
+.cert-founder {
+  width: 16%;
+  height: 3.5vw;
+  display: inline-block;
+  border-bottom: 0.15vw solid #202e66;
+}
+
+.cert-founder-sign {
+  width: 95%;
+}
+
+.cert-instructor {
+  width: 80%;
+  height: 3.5vw;
+  display: inline-block;
+  border-bottom: 0.15vw solid #202e66;
+  margin-left: 1vw;
+}
+
+.cert-instructor-sign {
+  width: 16%;
+  margin-left: 1vw;
+}
+
+.founder-name, .instructor-name {
+  border-bottom: none;
+}
+
+.founder-name p, .instructor-name p {
+  text-align: center;
+  color: #202e66;
+  font-size: 1.4vw;
+  margin-block-start: 0.5vw;
+  margin-block-end: 0.5vw;
+}
+
+.founder-name #founder-name, .instructor-name #instructor-name {
+  font-weight: bold;
+}
+
+.cert-purple {
+  color:#71278c;
+}
+
+.cert-red {
+  color:#fa0058;
+}
+
+.cert-yellow {
+  color:#ffb600;
+}
+
+.cert-green {
+  color:#00aea4;
+}
+
+.cert-blue {
+  color:#00b0f1;
+}
+</style>
 <%page expression_filter="h"/>
 <%inherit file="accomplishment-base.html" />
 <%! from django.utils.translation import ugettext as _ %>
@@ -6,8 +165,73 @@
 <%include file="_accomplishment-banner.html" />
 % endif
 <%include file="_accomplishment-introduction.html" />
-
+<!--Your theme goes here-->
 <%include file="_accomplishment-rendering.html" />
+<div class="container">
+  <div class="certificate">
+    <img class="logo middle" src="./public/logo.svg">
+    <div class="cert-student-name middle">
+      <p>${accomplishment_copy_name}</p>
+    </div>
+    <div class="class-name middle">
+      <p id="cert-status">Has successfully completed with <span class="cert-purple">D</span><span class="cert-red">I</span><span class="cert-yellow">S</span><span class="cert-green">T</span><span class="cert-blue">I</span><span class="cert-purple">N</span><span class="cert-red">C</span><span class="cert-yellow">T</span><span class="cert-green">I</span><span class="cert-blue">O</span><span class="cert-purple">N</span></p>
+      <p id="cert-title">INTRODUCTION TO PROGRAMMING WITH SCRATCH</p>
+      <p id="cert-program">SUMMER BOOTCAMP</p>
+      <p id="cert-org">An online course offered by STEAM for Vietnam</p>
+    </div>
+    <div class="cert-date middle">
+      <p>Dec 31, 2020</p>
+    </div>
+    <div class="cert-signature middle">
+      <div>
+        <div class="cert-founder">
+          <img class="cert-founder-sign" src="./public/founder.png">
+        </div>
+        <div class="cert-instructor middle">
+                <div class="accomplishment-signatories">
+                    <h3 class="accomplishment-signatories-title sr-only">${_("Noted by")}</h3>
+
+                    <div class="wrapper-signatories">
+                        <div class="list-signatories">
+                            % if certificate_data:
+                                % for signatory in certificate_data.get('signatories', []):
+                                    % if signatory.get('signature_image_path'):
+                                        <div class="signatory">
+                                            <img class="signatory-signature" src="${static.url(signatory['signature_image_path'])}" alt="${signatory['name']}">
+
+                                            <h4 class="signatory-name hd-5">${signatory['name']}</h4>
+                                            <p class="signatory-credentials copy copy-micro">
+                                                <span class="role">${signatory['title']}</span>
+                                                <span class="organization">${signatory['organization']}</span>
+                                            </p>
+                                        </div>
+                                    % endif
+                                % endfor
+                            % endif
+                        </div>
+                    </div>
+                </div>
+                % endif
+            </div>
+        </div>
+      </div>
+      <div>
+        <div class="cert-founder founder-name">
+          <p id="founder-name">Hung Tran</p>
+          <p>Founder</p>
+        </div>
+        <div class="cert-instructor instructor-name">
+          <p id="instructor-name">Duc Ngo, Song-Ha Nguyen, Kelly Tran, Nga Hoang, Vinh Luong</p>
+          <p>Instructors</p>
+        </div>
+      </div>
+      
+  
+    </div>
+  </div>
+</div>
+
+
 <div class="wrapper-about">
     <aside role="complementary" class="about" aria-label=${_("About edX Certificates")}>
         <%include file="_about-edx.html" />
